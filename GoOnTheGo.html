@@ -7,39 +7,153 @@
   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
   <meta name="description" content="" />
   <meta name="keywords" content="" />
-</head>
-<body>
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAtXub0KfNRn27EumIwJAbBRSYIqGd_9OtYCwHveiMON1xIpc35xS4O5AmsWy7JWa6LUkRooV7UWHR1g"
+        type="text/javascript"></script>
+<script>
+//-----------------------------------------------------------------------------
 
-<table width='100%' border='1' cellpadding='3' cellspacing='0'>
+function bodyLoad() {
+  mapLoad();
+}
+//-----------------------------------------------------------------------------
+
+function mapLoad() {
+  if (!GBrowserIsCompatible())
+    return;
+
+  origMap = new GMap2(document.getElementById("map"));
+  origMap.addControl(new GSmallMapControl());
+  origMap.addControl(new GMapTypeControl());
+  GEvent.addListener(origMap, "moveend", function() {
+    var center = origMap.getCenter();
+    //document.getElementById("origMessage").innerHTML = center.toString();
+    //setLocation("orig", center.toString());
+    //showDistance();
+  });
+  origMap.setCenter(new GLatLng(21.321999913, -157.9236602783203), 10);
+ }
+//-----------------------------------------------------------------------------
+
+function setLocation (origDest, latLon) {
+  var arrayLL = latLon.split(",");
+  var lat = arrayLL[0];
+  var lon = arrayLL[1];
+  if (lat[0] == "(")
+    lat = lat.substring(1);
+  if (lon[lon.length-1] == ")")
+    lon = lon.substring(0,lon.length-1);
+  if (lon[0] == ' ')
+    lon = lon.substring(1);
+
+  var nameObj = document.getElementById(origDest + "Name");
+  if (!nameObj)
+    return;
+
+  var latObj = document.getElementById(origDest + "Lat");
+  if (!latObj)
+    return;
+  if (latObj.value != lat) {
+    latObj.value = lat;
+        //alert("clearing " + nameObj.id + ".value");
+    nameObj.value = "";
+  }
+
+  var lonObj = document.getElementById(origDest + "Lon");
+  if (!lonObj)
+    return;
+  if (lonObj.value != lon) {
+    lonObj.value = lon;
+    nameObj.value = "";
+  }
+}
+//-----------------------------------------------------------------------------
+
+var minStars = 3; // initial value (medium)
+
+function rating(stars) {
+  minStars = stars;
+  var star1 = document.getElementById('star1');
+  var star2 = document.getElementById('star2');
+  var star3 = document.getElementById('star3');
+  var star4 = document.getElementById('star4');
+  var star5 = document.getElementById('star5');
+  switch (stars) {
+    case 5: 
+      star2.src = 'StarBlue.jpg';
+      star3.src = 'StarBlue.jpg';
+      star4.src = 'StarBlue.jpg';
+      star5.src = 'StarBlue.jpg';
+      break;
+    case 4: 
+      star2.src = 'StarBlue.jpg';
+      star3.src = 'StarBlue.jpg';
+      star4.src = 'StarBlue.jpg';
+      star5.src = 'StarGray.jpg';
+      break;
+    case 3: 
+      star2.src = 'StarBlue.jpg';
+      star3.src = 'StarBlue.jpg';
+      star4.src = 'StarGray.jpg';
+      star5.src = 'StarGray.jpg';
+      break;
+    case 2: 
+      star2.src = 'StarBlue.jpg';
+      star3.src = 'StarGray.jpg';
+      star4.src = 'StarGray.jpg';
+      star5.src = 'StarGray.jpg';
+      break;
+    case 1: 
+      star2.src = 'StarGray.jpg';
+      star3.src = 'StarGray.jpg';
+      star4.src = 'StarGray.jpg';
+      star5.src = 'StarGray.jpg';
+      break;
+	default: ;
+  }
+  alert ('Displaying only ' + stars + ' star and above restrooms.');	  
+}
+//-----------------------------------------------------------------------------
+</script>
+
+
+
+</head>
+<body style='font-family:arial;' onload='bodyLoad();'>
+
+<table width='100%' border='0' cellpadding='3' cellspacing='0' background='GoOnTheGoLogoBackground.jpg' style='padding:0px;'>
   <tr>
-    <td align='center' style='font-family:Arial; font-weight:bold; font-style:italic; font-size:24pt;'><img src='GoOnTheGoLogo-400x50.jpg' atl='Go On The Go'/></td>
+    <td align='left' valign='middle' background='GoOnTheGoLogoBackground.jpg' style='padding:0px;'><!--<img src='GoOnTheGoLogo.jpg' atl='Go On The Go'/>--><span style='color:white; font-family:arial; font-size:24pt; font-weight:bold; font-style:italic;'>&nbsp;Go On The Go</span></td>
+    <td align='right'><button onclick='mapLoad();'>Find Me</button>&nbsp;</td>
   </tr>
-  <tr>
-    <td id='tdMap'><div id='divMap' style='width:100%; height:400px;'><img src='map.jpg'></td>
-  </tr>	
-  <tr>
-    <td align='center'>
-	  <button onclick='mapMyLocation();'>Find Me</button>
-	</td>
-  </tr>
+</table>  
+
+<div id='map' style='width:100%; height:400px;'><!--<img src='map.jpg'>--></div>
+ 
+<table width='100%' border='1' cellpadding='2' cellspacing='0'>
   <tr>  
-    <td>
+    <td valign='top'>
+	  <a href='javascript:rating(1);'><img id='star1' src='StarBlue.jpg' border='0' title='Click for all restrooms'/></a>
+	  <a href='javascript:rating(2);'><img id='star2' src='StarBlue.jpg' border='0' title='Click for 2 Star or higher restrooms'/></a>
+	  <a href='javascript:rating(3);'><img id='star3' src='StarBlue.jpg' border='0' title='Click for 3 Star or higher restrooms'/></a>
+	  <a href='javascript:rating(4);'><img id='star4' src='StarGray.jpg' border='0' title='Click for 4 Star or higher restrooms'/></a>
+	  <a href='javascript:rating(5);'><img id='star5' src='StarGray.jpg' border='0' title='Click for 5 Star restrooms only'/></a>
+	  <br/>
 	  Minimum Rating<br/>
-	  <input name='filterRating' type='radio' value='1'> 1 Star<br/>
-	  <input name='filterRating' type='radio' value='2'> 2 Stars<br/>
-	  <input name='filterRating' type='radio' value='3'> 3 Stars<br/>
-	  <input name='filterRating' type='radio' value='4'> 4 Stars<br/>
-	  <input name='filterRating' type='radio' value='5'> 5 Stars<br/>
-	  <hr/>
+    </td>
+    <td valign='top'>
 	  Options<br/>
 	  <input type='checkbox' name='public' id='public' value='public' checked> Public<br/>
 	  <input type='checkbox' name='customer' id='customer' value='customer'> Customers Only<br/>
 	  <input type='checkbox' name='family' id='family' value='family'> Family Friendly<br/>
+	</td>
+  </tr>
+  <tr>	
+	<td colspan='2' align='center'>  
 	  <button onclick='plot();'>Find Restrooms</button>
 	</td>  
   </tr>
   <tr>  
-    <td>
+    <td colspan='2' align='center'>
 	  <button onclick='addRestroom();'>Add Restroom</button>
 	</td>  
   </tr>
