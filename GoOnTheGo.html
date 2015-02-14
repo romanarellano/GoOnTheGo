@@ -7,8 +7,11 @@
   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
   <meta name="description" content="" />
   <meta name="keywords" content="" />
-<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAtXub0KfNRn27EumIwJAbBRSYIqGd_9OtYCwHveiMON1xIpc35xS4O5AmsWy7JWa6LUkRooV7UWHR1g"
-        type="text/javascript"></script>
+<!--<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAtXub0KfNRn27EumIwJAbBRSYIqGd_9OtYCwHveiMON1xIpc35xS4O5AmsWy7JWa6LUkRooV7UWHR1g"
+        type="text/javascript"></script>-->
+		
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+			
 <script>
 //-----------------------------------------------------------------------------
  
@@ -53,6 +56,7 @@ function _getWindowHeight(win) {
 
 function bodyLoad() {
   mapLoad();
+  google.maps.event.addDomListener(window, 'load', initialize);
 }
 //-----------------------------------------------------------------------------
 
@@ -87,7 +91,74 @@ function User() {
 }
 //-----------------------------------------------------------------------------
 
+var map = null;
+
 function mapLoad() {
+  var myLatlng = new google.maps.LatLng(21.291633588436564, -157.84459948539734);
+  var mapOptions = {
+    zoom: 15,
+    center: myLatlng
+  }
+  map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+  var marker = new google.maps.Marker({
+      position: myLatlng,
+      map: map,
+      title: 'You are here'
+  });
+}
+//-----------------------------------------------------------------------------
+
+var shape = {
+coord: [1, 1, 1, 20, 18, 20, 18 , 1],
+    type: 'poly'
+ };
+
+function plotRestroom(restroom) {
+  //alert("plotRestroom()\nrestroom.id = " + restroom.id);
+  var str = restroom.name;
+  if (restroom.locDetail != '')
+    str += " - " + restroom.locDetail;
+  var myLatlng = new google.maps.LatLng(restroom.lat, restroom.lon);
+  var marker = new google.maps.Marker({
+      position: myLatlng,
+      map: map,
+      title: str
+	  
+  });
+}  
+//-----------------------------------------------------------------------------
+
+function plotRestrooms() {
+  //alert("plotRestrooms()\naRestroom.length = " + aRestroom.length);
+  for (var i = 0; i < aRestroom.length; i++) {
+    plotRestroom(aRestroom[i]);
+  }
+}
+//-----------------------------------------------------------------------------
+
+var aRestroom = new Array();
+
+// dummy test records
+var restroom = new Restroom();
+restroom.id = 1;
+restroom.name = "Macy's";
+restroom.locDetail = "3rd floor";
+restroom.lat = 21.290352727863862;
+restroom.lon = -157.8416557610035;
+aRestroom[0] = restroom;
+
+// dummy test records
+restroom = new Restroom();
+restroom.id = 2;
+restroom.name = "WalMart";
+restroom.lat = 21.294803078971693;
+restroom.lon = -157.84295797348022;
+aRestroom[1] = restroom;
+
+//-----------------------------------------------------------------------------
+
+function x_mapLoad() {
   if (!GBrowserIsCompatible())
     return;
 
@@ -161,9 +232,9 @@ function plot() {
   var filterFamily = document.getElementById('family');
   if (filterFamily.checked)
     str += "\nIncluding Family Friendly Restrooms.";
-  alert (str);	  
+  //alert (str);	  
 
-  // plot using filters (redraw pins on map)   
+  plotRestrooms(); // plot using filters (redraw pins on map)   
 }
 //-----------------------------------------------------------------------------
 
@@ -176,34 +247,34 @@ function rating(stars) {
   var star5 = document.getElementById('star5');
   switch (stars) {
     case 5: 
-      star2.src = 'StarBlue.jpg';
-      star3.src = 'StarBlue.jpg';
-      star4.src = 'StarBlue.jpg';
-      star5.src = 'StarBlue.jpg';
+      star2.src = 'img/StarBlue.jpg';
+      star3.src = 'img/StarBlue.jpg';
+      star4.src = 'img/StarBlue.jpg';
+      star5.src = 'img/StarBlue.jpg';
       break;
     case 4: 
-      star2.src = 'StarBlue.jpg';
-      star3.src = 'StarBlue.jpg';
-      star4.src = 'StarBlue.jpg';
-      star5.src = 'StarGray.jpg';
+      star2.src = 'img/StarBlue.jpg';
+      star3.src = 'img/StarBlue.jpg';
+      star4.src = 'img/StarBlue.jpg';
+      star5.src = 'img/StarGray.jpg';
       break;
     case 3: 
-      star2.src = 'StarBlue.jpg';
-      star3.src = 'StarBlue.jpg';
-      star4.src = 'StarGray.jpg';
-      star5.src = 'StarGray.jpg';
+      star2.src = 'img/StarBlue.jpg';
+      star3.src = 'img/StarBlue.jpg';
+      star4.src = 'img/StarGray.jpg';
+      star5.src = 'img/StarGray.jpg';
       break;
     case 2: 
-      star2.src = 'StarBlue.jpg';
-      star3.src = 'StarGray.jpg';
-      star4.src = 'StarGray.jpg';
-      star5.src = 'StarGray.jpg';
+      star2.src = 'img/StarBlue.jpg';
+      star3.src = 'img/StarGray.jpg';
+      star4.src = 'img/StarGray.jpg';
+      star5.src = 'img/StarGray.jpg';
       break;
     case 1: 
-      star2.src = 'StarGray.jpg';
-      star3.src = 'StarGray.jpg';
-      star4.src = 'StarGray.jpg';
-      star5.src = 'StarGray.jpg';
+      star2.src = 'img/StarGray.jpg';
+      star3.src = 'img/StarGray.jpg';
+      star4.src = 'img/StarGray.jpg';
+      star5.src = 'img/StarGray.jpg';
       break;
 	default: ;
   }
@@ -263,7 +334,7 @@ function insertRestroom() {
   var restroom = new Restroom();
   // input fields to restroom object fields
   // insert restroom record into database - get returned ID value
-  alert("Insert review record into database.");
+  alert("Insert restroom record into database.");
 
   insertReview(restroom.id);
   // call plot() again (to display new data)
@@ -275,9 +346,9 @@ function insertRestroom() {
 </head>
 <body style='font-family:arial; margin:0px; background-color:black;' onload='bodyLoad();'>
 
-<table width='100%' border='0' cellpadding='3' cellspacing='0' background='GoOnTheGoLogoBackground.jpg' style='padding:0px;'>
+<table width='100%' border='0' cellpadding='3' cellspacing='0' background='img/GoOnTheGoLogoBackground.jpg' style='padding:0px;'>
   <tr>
-    <td align='left' valign='middle' background='GoOnTheGoLogoBackground.jpg' style='padding:0px;'><!--<img src='GoOnTheGoLogo.jpg' atl='Go On The Go'/>--><span style='color:white; font-family:arial; font-size:24pt; font-weight:bold; font-style:italic;'>&nbsp;Go On The Go</span></td>
+    <td align='left' valign='middle' background='img/GoOnTheGoLogoBackground.jpg' style='padding:0px;'><!--<img src='GoOnTheGoLogo.jpg' atl='Go On The Go'/>--><span style='color:white; font-family:arial; font-size:24pt; font-weight:bold; font-style:italic;'>&nbsp;Go On The Go</span></td>
     <td align='right'><button onclick='mapLoad();'>Find Me</button>&nbsp;</td>
   </tr>
 </table>  
@@ -287,11 +358,11 @@ function insertRestroom() {
 <table width='100%' border='1' cellpadding='2' cellspacing='0' style='background-color:white;'>
   <tr>  
     <td valign='top' align='center'>
-	  <a href='javascript:rating(1);'><img id='star1' src='StarBlue.jpg' border='0' title='Click for all restrooms'/></a>
-	  <a href='javascript:rating(2);'><img id='star2' src='StarBlue.jpg' border='0' title='Click for 2 Star or higher restrooms'/></a>
-	  <a href='javascript:rating(3);'><img id='star3' src='StarBlue.jpg' border='0' title='Click for 3 Star or higher restrooms'/></a>
-	  <a href='javascript:rating(4);'><img id='star4' src='StarGray.jpg' border='0' title='Click for 4 Star or higher restrooms'/></a>
-	  <a href='javascript:rating(5);'><img id='star5' src='StarGray.jpg' border='0' title='Click for 5 Star restrooms only'/></a>
+	  <a href='javascript:rating(1);'><img id='star1' src='img/StarBlue.jpg' border='0' title='Click for all restrooms'/></a>
+	  <a href='javascript:rating(2);'><img id='star2' src='img/StarBlue.jpg' border='0' title='Click for 2 Star or higher restrooms'/></a>
+	  <a href='javascript:rating(3);'><img id='star3' src='img/StarBlue.jpg' border='0' title='Click for 3 Star or higher restrooms'/></a>
+	  <a href='javascript:rating(4);'><img id='star4' src='img/StarGray.jpg' border='0' title='Click for 4 Star or higher restrooms'/></a>
+	  <a href='javascript:rating(5);'><img id='star5' src='img/StarGray.jpg' border='0' title='Click for 5 Star restrooms only'/></a>
 	  <br/>
 	  Minimum Rating
     </td>
