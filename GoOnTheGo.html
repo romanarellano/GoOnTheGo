@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title></title>
+  <meta http-equiv="generator" content="CoffeeCup HTML Editor (www.coffeecup.com)" />
+  <meta name="created" content="Sat, 14 Feb 2015 07:26:24 GMT" />
+  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+</head>
+<body>
+
+<table width='100%' border='1' cellpadding='3' cellspacing='0'>
+  <tr>
+    <td align='center' style='font-family:Arial; font-weight:bold; font-style:italic; font-size:24pt;'>GoOnTheGo</td>
+  </tr>
+  <tr>
+    <td id='tdMap'><div id='divMap' style='width:100%; height:400px;'><img src='map.jpg'></td>
+  </tr>	
+  <tr>
+    <td align='center'>
+	  <button onclick='mapMyLocation();'>Find Me</button>
+	</td>
+  </tr>
+  <tr>  
+    <td>
+	  Minimum Rating<br/>
+	  <input name='filterRating' type='radio' value='1'> 1 Star<br/>
+	  <input name='filterRating' type='radio' value='2'> 2 Stars<br/>
+	  <input name='filterRating' type='radio' value='3'> 3 Stars<br/>
+	  <input name='filterRating' type='radio' value='4'> 4 Stars<br/>
+	  <input name='filterRating' type='radio' value='5'> 5 Stars<br/>
+	  <hr/>
+	  Options<br/>
+	  <input type='checkbox' name='public' id='public' value='public' checked> Public<br/>
+	  <input type='checkbox' name='customer' id='customer' value='customer'> Customers Only<br/>
+	  <input type='checkbox' name='family' id='family' value='family'> Family Friendly<br/>
+	  <button onclick='plot();'>Find Restrooms</button>
+	</td>  
+  </tr>
+  <tr>  
+    <td>
+	  <button onclick='addRestroom();'>Add Restroom</button>
+	</td>  
+  </tr>
+</table>
+
+</body>
+</html>
+
