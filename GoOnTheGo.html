@@ -56,6 +56,37 @@ function bodyLoad() {
 }
 //-----------------------------------------------------------------------------
 
+function Restroom() {
+  this.id = 0;
+  this.name = '';
+  this.lat = 0;
+  this.lon = 0;
+  this.locDetail = '';
+  this.accesPublic = true;
+  this.accesCustomer = false;
+  this.family = false;
+  this.timestamp = new Date();
+  this.user = ''; // need to get current user id/name
+}
+//-----------------------------------------------------------------------------
+
+function Review() {
+  this.id = 0;
+  this.idRestroom = 0;
+  this.rating = 3;
+  this.remarks = '';
+  this.timestamp = new Date();
+  this.user = ''; // need to get current user id/name
+}
+//-----------------------------------------------------------------------------
+
+function User() {
+  this.id = 0;
+  this.name = 0;
+  this.timestamp = new Date();
+}
+//-----------------------------------------------------------------------------
+
 function mapLoad() {
   if (!GBrowserIsCompatible())
     return;
@@ -194,6 +225,33 @@ function addRestroom() {
 }
 //-----------------------------------------------------------------------------
 
+function hideAddReview() {
+  var divAddReview = document.getElementById('divAddReview');
+  divAddReview.style.display = 'none'; // hide input fields
+}
+//-----------------------------------------------------------------------------
+
+function insertReview(id) {
+  var review = new Review();
+  review.idRestroom = id;
+  // input field to review object fields
+  // insert review record into database
+  alert("Insert review record into database.");
+}
+//-----------------------------------------------------------------------------
+
+function updateRestroom(id) {
+  // input fields to restroom object fields
+  // update restroom record in database 
+  
+  hideAddReview(); 
+
+  // input fields to review object fields
+  insertReview(id);
+  //alert("Insert new Review record (possibly update Restroom record) and re-plot map");
+}  
+//-----------------------------------------------------------------------------
+
 function hideAddRestroom() {
   var divAdd = document.getElementById('divAdd');
   divAdd.style.display = 'none'; // hide input fields
@@ -202,7 +260,14 @@ function hideAddRestroom() {
 
 function insertRestroom() {
   hideAddRestroom(); 
-  alert("Insert new Restroom record and re-plot map");
+  var restroom = new Restroom();
+  // input fields to restroom object fields
+  // insert restroom record into database - get returned ID value
+  alert("Insert review record into database.");
+
+  insertReview(restroom.id);
+  // call plot() again (to display new data)
+  alert("Re-plot map");
 }
 //-----------------------------------------------------------------------------
 </script>
