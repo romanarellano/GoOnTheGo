@@ -49,7 +49,19 @@ var app = {
         //console.log('Received Event: ' + id);
     }
 };
+//-----------------------------------------------------------------------------
 
+var myLat = 21.291633588436564;
+var myLon = -157.84459948539734;
+
+//-----------------------------------------------------------------------------
+
+function setLatLong() {
+  // need to get Lat/Long from phone's GPS
+  myLat = 21.291633588436564;
+  myLon = -157.84459948539734;
+}
+//-----------------------------------------------------------------------------
 
 function getWindowWidth() { // Assumes current window to be used
   return _getWindowWidth(window);
@@ -147,27 +159,27 @@ var shape = {
   type: 'poly'
  };
  
- var flag1 = new google.maps.MarkerImage('../img/toilet1.png',
+ var flag1 = new google.maps.MarkerImage('/img/toilet1.png',
       new google.maps.Size(26, 35),
       new google.maps.Point(0,0),
       new google.maps.Point(0, 17));
  
- var flag2 = new google.maps.MarkerImage('../img/toilet2.png',
+ var flag2 = new google.maps.MarkerImage('/img/toilet2.png',
       new google.maps.Size(26, 35),
       new google.maps.Point(0,0),
       new google.maps.Point(0, 17)); 
 
-var flag3 = new google.maps.MarkerImage('../img/toilet3.png',
+var flag3 = new google.maps.MarkerImage('/img/toilet3.png',
       new google.maps.Size(26, 35),
       new google.maps.Point(0,0),
       new google.maps.Point(0, 17)); 
 
-var flag4 = new google.maps.MarkerImage('../img/toilet4.png',
+var flag4 = new google.maps.MarkerImage('/img/toilet4.png',
       new google.maps.Size(26, 35),
       new google.maps.Point(0,0),
       new google.maps.Point(0, 17)); 
 
-var flag5 = new google.maps.MarkerImage('../img/toilet5.png',
+var flag5 = new google.maps.MarkerImage('/img/toilet5.png',
       new google.maps.Size(26, 35),
       new google.maps.Point(0,0),
       new google.maps.Point(0, 17));
