@@ -380,7 +380,7 @@ function addRestroom() {
   var width = 380; 
   divAdd.style.width = width + 'px';
   divAdd.style.opacity = 0.90;
-  var left = (getWindowWidth() - width) / 2;
+  var left = 10; //(getWindowWidth() - width) / 2;
   if (left < 0)
     left = 0;
   divAdd.style.left = left + 'px';    
