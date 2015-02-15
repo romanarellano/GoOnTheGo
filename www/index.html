@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2014 Adobe Systems Incorporated. All rights reserved.
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>Hello World</title>
+    </head>
+    <body>
+        <div class="app">
+            <table width='100%' border='0' cellpadding='3' cellspacing='0' background='img/GoOnTheGoLogoBackground.jpg' style='padding:0px;'>
+  <tr>
+    <td align='left' valign='middle' background='img/GoOnTheGoLogoBackground.jpg' style='padding:0px;'><!--<img src='GoOnTheGoLogo.jpg' atl='Go On The Go'/>--><span style='color:white; font-family:arial; font-size:24pt; font-weight:bold; font-style:italic;'>&nbsp;Go On The Go</span></td>
+    <td align='right'><button onclick='mapLoad();'>Find Me</button>&nbsp;</td>
+  </tr>
+</table>  
+
+<div id='map' style='width:100%; height:400px; border-width:1px 0px 0px 0px; border-style:solid; border-color:black;'><!--<img src='map.jpg'>--></div>
+ 
+<table width='100%' border='1' cellpadding='2' cellspacing='0' style='background-color:white;'>
+  <tr>  
+    <td valign='top' align='center'>
+      <a href='javascript:rating(1);'><img id='star1' src='img/StarBlue.jpg' border='0' title='Click for all restrooms'/></a>
+      <a href='javascript:rating(2);'><img id='star2' src='img/StarBlue.jpg' border='0' title='Click for 2 Star or higher restrooms'/></a>
+      <a href='javascript:rating(3);'><img id='star3' src='img/StarBlue.jpg' border='0' title='Click for 3 Star or higher restrooms'/></a>
+      <a href='javascript:rating(4);'><img id='star4' src='img/StarGray.jpg' border='0' title='Click for 4 Star or higher restrooms'/></a>
+      <a href='javascript:rating(5);'><img id='star5' src='img/StarGray.jpg' border='0' title='Click for 5 Star restrooms only'/></a>
+      <br/>
+      Minimum Rating
+    </td>
+    <td valign='top'>
+      <!--Options<br/>-->
+      <input type='checkbox' name='public' id='public' value='public' checked onclick='filterCheck();'> Public<br/>
+      <input type='checkbox' name='customer' id='customer' value='customer' onclick='filterCheck();'> Customers Only<br/>
+      <input type='checkbox' name='family' id='family' value='family'> Family Friendly<br/>
+    </td>
+  </tr>
+</table>
+<table width='100%' cellpadding='0' cellspacing='0' border='0' style='background-color:silver;'>  
+  <tr>  
+    <td width='50%' align='center'>  
+      <button onclick='plot();'>Find Restrooms</button>
+    </td>  
+    <td width='50%' align='center'>
+      <button onclick='addRestroom();'>Add Restroom</button>
+    </td>  
+  </tr>
+</table>
+
+<div id='divAdd' style='display:none; position:absolute; z-index:10; padding:10px; background-color:#dfefff; top:45px; left:10px; width:400px; border:black 1px solid;'>
+<table width='100%' border='0' cellpadding='2' cellspacing='0'>
+  <tr><td colspan='2' align='center'><b>Add Restroom</b></td></tr>
+  <tr><td align='right'>Name</td><td><input id='rrName' size='40' value=''/></td</tr>
+  <tr><td align='right'>Latitude</td><td><input id='rrLat' size='17' maxlength='17' value=''/></td</tr>
+  <tr><td align='right'>Longitude</td><td><input id='rrLon' size='18' maxlength='18' value=''/></td</tr>
+  <tr><td align='right'>Details</td><td><input id='rrLocDetail' size='40' maxlength='255' value=''/></td</tr>
+  <tr><td align='right'></td><td><input type='checkbox' id='rrPublic' value='public' checked onclick='rrFilterCheck();'> Public</td</tr>
+  <tr><td align='right'></td><td><input type='checkbox' id='rrCustomer' value='customer' onclick='rrFilterCheck();'> Customer Only</td</tr>
+  <tr><td align='right'></td><td><input type='checkbox' id='rrFamily' value='family'> Family Friendly</td</tr>
+  <tr><td align='right'>Rating</td><td><select size='1'>
+    <option value='5'>5 Star</option>
+    <option value='4'>4 Star</option>
+    <option value='3'>3 Star</option>
+    <option value='2'>2 Star</option>
+    <option value='1'>1 Star</option>
+  </select></td</tr>    
+  <tr><td align='right'>Remarks</td><td><textarea id='rrRemarks' rows='4' cols='30' value=''></textarea></td</tr>
+  <tr><td colspan='2' align='center'>
+    <button onclick='insertRestroom();'>Add</button>
+    &nbsp; &nbsp;
+    <button onclick='hideAddRestroom();'>Cancel</button>
+  </td</tr>
+</table>    
+</div>
+        </div>
+        <script type="text/javascript" src="cordova.js"></script>
+        <!--<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAtXub0KfNRn27EumIwJAbBRSYIqGd_9OtYCwHveiMON1xIpc35xS4O5AmsWy7JWa6LUkRooV7UWHR1g"
+        type="text/javascript"></script>-->
+    
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+    </body>
+</html>
