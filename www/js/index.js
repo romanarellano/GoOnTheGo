@@ -159,27 +159,27 @@ var shape = {
   type: 'poly'
  };
  
- var flag1 = new google.maps.MarkerImage('/img/toilet1.png',
+ var flag1 = new google.maps.MarkerImage('img/toilet1.png',
       new google.maps.Size(26, 35),
       new google.maps.Point(0,0),
       new google.maps.Point(0, 17));
  
- var flag2 = new google.maps.MarkerImage('/img/toilet2.png',
+ var flag2 = new google.maps.MarkerImage('img/toilet2.png',
       new google.maps.Size(26, 35),
       new google.maps.Point(0,0),
       new google.maps.Point(0, 17)); 
 
-var flag3 = new google.maps.MarkerImage('/img/toilet3.png',
+var flag3 = new google.maps.MarkerImage('img/toilet3.png',
       new google.maps.Size(26, 35),
       new google.maps.Point(0,0),
       new google.maps.Point(0, 17)); 
 
-var flag4 = new google.maps.MarkerImage('/img/toilet4.png',
+var flag4 = new google.maps.MarkerImage('img/toilet4.png',
       new google.maps.Size(26, 35),
       new google.maps.Point(0,0),
       new google.maps.Point(0, 17)); 
 
-var flag5 = new google.maps.MarkerImage('/img/toilet5.png',
+var flag5 = new google.maps.MarkerImage('img/toilet5.png',
       new google.maps.Size(26, 35),
       new google.maps.Point(0,0),
       new google.maps.Point(0, 17));
@@ -397,6 +397,9 @@ function addRestroom() {
     left = 0;
   divAdd.style.left = left + 'px';    
   divAdd.style.display = ''; // make visible
+  document.getElementById('rrLat').value = myLat;
+  document.getElementById('rrLon').value = myLon;
+
 }
 //-----------------------------------------------------------------------------
 
