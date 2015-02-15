@@ -25,22 +25,25 @@
         <meta name="format-detection" content="telephone=no" />
         <meta name="msapplication-tap-highlight" content="no" />
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <!--<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />-->
+
+        <meta name="viewport" content="user-scalable=no, initial-scale=2, maximum-scale=1, minimum-scale=1, width=400, height=800, target-densitydpi=device-dpi" />
+
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <title>Hello World</title>
     </head>
     <body>
         <div class="app">
-            <table width='100%' border='0' cellpadding='3' cellspacing='0' background='img/GoOnTheGoLogoBackground.jpg' style='padding:0px;'>
+            <table width='400' _width='100%' border='0' cellpadding='3' cellspacing='0' background='img/GoOnTheGoLogoBackground.jpg' style='padding:0px;'>
   <tr>
     <td align='left' valign='middle' background='img/GoOnTheGoLogoBackground.jpg' style='padding:0px;'><!--<img src='GoOnTheGoLogo.jpg' atl='Go On The Go'/>--><span style='color:white; font-family:arial; font-size:24pt; font-weight:bold; font-style:italic;'>&nbsp;Go On The Go</span></td>
     <td align='right'><button onclick='mapLoad();'>Find Me</button>&nbsp;</td>
   </tr>
 </table>  
 
-<div id='map' style='width:100%; height:400px; border-width:1px 0px 0px 0px; border-style:solid; border-color:black;'><!--<img src='map.jpg'>--></div>
+<div id='map' style='width:400px; height:400px; border-width:1px 0px 0px 0px; border-style:solid; border-color:black;'><!--<img src='map.jpg'>--></div>
  
-<table width='100%' border='1' cellpadding='2' cellspacing='0' style='background-color:white;'>
+<table width='400' _width='100%' border='1' cellpadding='2' cellspacing='0' style='background-color:white;'>
   <tr>  
     <td valign='top' align='center'>
       <a href='javascript:rating(1);'><img id='star1' src='img/StarBlue.jpg' border='0' title='Click for all restrooms'/></a>
@@ -59,7 +62,7 @@
     </td>
   </tr>
 </table>
-<table width='100%' cellpadding='0' cellspacing='0' border='0' style='background-color:silver;'>  
+<table width='400' _width='100%' cellpadding='0' cellspacing='0' border='0' style='background-color:silver;'>  
   <tr>  
     <td width='50%' align='center'>  
       <button onclick='plot();'>Find Restrooms</button>
