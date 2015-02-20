@@ -143,7 +143,7 @@ function mapLoad() {
   var mapOptions = {
     zoom: 15,
     center: myLatlng
-  }
+  };
   map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
   var marker = new google.maps.Marker({
@@ -280,6 +280,7 @@ function x_mapLoad() {
 //-----------------------------------------------------------------------------
 
 function setLocation (origDest, latLon) {
+  
   var arrayLL = latLon.split(",");
   var lat = arrayLL[0];
   var lon = arrayLL[1];
@@ -447,3 +448,11 @@ function insertRestroom() {
   // call plot() again (to display new data)
   alert("Re-plot map");
 }
+
+navigator.geolocation.getCurrentPosition(function(location){
+
+    console.log(location);
+  },function(error){
+      //console.log(error);
+
+  });
